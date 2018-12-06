@@ -2,7 +2,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 This application runs on Mocha as test engine, it also has configuration to run on the [vscode Mocha sidebar](https://marketplace.visualstudio.com/items?itemName=maty.vscode-mocha-sidebar), if installed.
 
+This applications uses [Chai](https://www.chaijs.com/api/) as assertion library and [chai-enzyme](https://github.com/producthunt/chai-enzyme), based on [Enzyme](https://airbnb.io/enzyme/docs/api/), for testing ReactJS components, this is just a minimal setup and you may need, or feel like using other libraries to test your ReactJS application.
+
 As soon as you clone the project, in order to start working on it, do an npm install in the root folder.
+
+Running on Linux, open vscode from the terminal, if the location of vscode is in your path (normally is). Otherwise vscode might not be able to find your local node install, this happens if you use mvn.
 
 
 ## Available Scripts
@@ -24,8 +28,6 @@ Launches the test runner MochaJS, not in watch mode.
 Running on Windows: you will have to change the test script in your package.json, in the `scripts` object:
 change the script as follows:
 `NODE_ENV=test&& mocha --require @babel/register --require ignore-styles src/test/*.test.js`
-
-Running on Linux, open vscode from the terminal, if the location of vscode is in your path (normally is). Otherwise vscode might not be able to find your local node install, this happens if you use mvn.
 
 ### `npm run build`
 
