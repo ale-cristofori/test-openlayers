@@ -27,7 +27,7 @@ Launches the test runner MochaJS, not in watch mode.
 
 Running on Windows: you will have to change the test script in your package.json, in the `scripts` object:
 change the script as follows:
-`NODE_ENV=test&& mocha --require @babel/register --require ignore-styles src/test/*.test.js`
+`set NODE_ENV=test&& mocha --require @babel/register --require ignore-styles src/test/*.test.js`
 
 ### `npm run build`
 
