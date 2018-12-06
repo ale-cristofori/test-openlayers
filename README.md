@@ -1,5 +1,10 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+This application runs on Mocha as test engine, it also has configuration to run on the [vscode Mocha sidebar](https://marketplace.visualstudio.com/items?itemName=maty.vscode-mocha-sidebar), if installed.
+
+As soon as you clone the project, in order to start working on it, do an npm install in the root folder.
+
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -15,6 +20,12 @@ You will also see any lint errors in the console.
 ### `npm test`
 
 Launches the test runner MochaJS, not in watch mode.
+
+Running on Windows: you will have to change the test script in your package.json, in the `scripts` object:
+change the script as follows:
+`NODE_ENV=test&& mocha --require @babel/register --require ignore-styles src/test/*.test.js`
+
+Running on Linux, open vscode from the terminal, if the location of vscode is in your path (normally is). Otherwise vscode might not be able to find your local node install, this happens if you use mvn.
 
 ### `npm run build`
 
