@@ -6,26 +6,37 @@ import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
 
+
 class MapComponent extends Component {
 
     constructor (props) {
         super(props);
         this.mapRef = null;
+        this.olMap = null;
         this.setMapRef = element => {
           this.mapRef = element;
-        }
-      }
+        }      
+    }
+      
 
     render() {
-        const styles = { height: '100%', width: '100%'}
+        const styles = { height: '50%', width: '50%'}
         return(
             <div style={styles} ref={this.setMapRef}></div>
         )
     }
 
+    componentWillUpdate(nextProps) {
+      const mapView = this.olMap.getView();
+      mapView.animate({
+        center: nextProps.currentLocation,
+        duration: 2000
+      });
+    }
+
     componentDidMount() {
         const mapDOMNode = ReactDOM.findDOMNode(this.mapRef);
-        new Map({
+        this.olMap = new Map({
             target: mapDOMNode,
             layers: [
               new TileLayer({
@@ -33,8 +44,8 @@ class MapComponent extends Component {
               })
             ],
             view: new View({
-              center: [0, 0],
-              zoom: 2
+              center: this.props.currentLocation,
+              zoom: 8
             })
           });
     }
