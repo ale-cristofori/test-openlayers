@@ -11,7 +11,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "NODE_ENV=test mocha --require @babel/register --require ignore-styles --require setup.js src/test/*.test.js",
+    "test": "NODE_ENV=test mocha --require babel-register.js --require ignore-styles --require setup.js  src/test/*.test.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -26,6 +26,7 @@
   "devDependencies": {
     "@babel/core": "^7.1.6",
     "@babel/plugin-transform-modules-commonjs": "^7.1.0",
+    "@babel/polyfill": "^7.0.0",
     "@babel/register": "^7.0.0",
     "babel-plugin-inline-react-svg": "^1.0.1",
     "babel-preset-react-app-babel-7": "^4.0.2-0",
