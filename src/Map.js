@@ -18,7 +18,6 @@ class MapComponent extends Component {
         }      
     }
       
-
     render() {
         const styles = { height: '50%', width: '50%'}
         return(
