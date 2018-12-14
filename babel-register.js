@@ -4,7 +4,6 @@ require("@babel/register")({
     ignore: [
       // When a file path matches this regex then it is **not** compiled
       /node_modules\/(?!(ol)\/)/
-  
       // The file's path is also passed to any ignore functions. It will
       // **not** be compiled if `true` is returned.
       //function(filepath) {

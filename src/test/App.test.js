@@ -20,7 +20,6 @@ describe('App Component testing', function() {
                       <option value="828862.6645485563,5933916.615134273" class="dd-locations">bern</option>
                     </select>;
     expect(wrapper).to.contain(editText);
-
 });
 
   chai.use(chaiEnzyme())
