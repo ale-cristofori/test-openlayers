@@ -10,7 +10,8 @@
 		"terminal.integrated.rendererType": "dom",
 		"mocha.files.glob": "src/test/*.test.js",
 		"mocha.requires": [
-			"@babel/register",
+			"babel-register.js",
+			"setup.js",
 			"ignore-styles"
 		],
 		"mocha.env": {
