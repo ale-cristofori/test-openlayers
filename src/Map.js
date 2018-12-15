@@ -31,6 +31,7 @@ class MapComponent extends Component {
         center: nextProps.currentLocation,
         duration: 2000
       });
+      //mapView.setCenter(nextProps.currentLocation);
     }
 
     componentDidMount() {

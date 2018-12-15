@@ -11,7 +11,7 @@ const LocationsSelect = (props) => {
   );
   return(
       <div>
-          <select onChange={props.onSelectLocation}>
+           <select onChange={props.onSelectLocation}>
               {locations}
           </select>
       </div>
@@ -32,10 +32,10 @@ class App extends Component {
     this.state = {
       currentLocation : fromLonLat([-0.12755, 51.507222])
     }
-    this.zoomToLocation = this.zoomToLocation.bind(this);
+    this.panToLocation = this.panToLocation.bind(this);
   }
 
-  zoomToLocation(e) {
+  panToLocation(e) {
     const selectedIndex = e.target.selectedOptions[0].index;
     const selectedLocation = this.locations[selectedIndex].coords;
     this.setState(() => {
@@ -48,7 +48,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <LocationsSelect locations={this.locations} onSelectLocation={this.zoomToLocation}/>
+      <LocationsSelect locations={this.locations} onSelectLocation={this.panToLocation}/>
       <MapComponent currentLocation={this.state.currentLocation}/>
       </div>
     );
