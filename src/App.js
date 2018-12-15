@@ -11,7 +11,7 @@ const LocationsSelect = (props) => {
   );
   return(
       <div>
-          <select onChange={props.onSelectLocation}>
+          <select onChange={e => props.onSelectLocation(e.target.selectedOptions[0].index)}>
               {locations}
           </select>
       </div>
@@ -35,8 +35,7 @@ class App extends Component {
     this.zoomToLocation = this.zoomToLocation.bind(this);
   }
 
-  zoomToLocation(e) {
-    const selectedIndex = e.target.selectedOptions[0].index;
+  zoomToLocation(selectedIndex) {
     const selectedLocation = this.locations[selectedIndex].coords;
     this.setState(() => {
       return {
