@@ -31,11 +31,11 @@ describe('App Component testing', function() {
 
   it('Pan to selection behaviour', () => {
     expect(mapComponent).to.have.length(1);
-    selectWrapper.simulate('change', { target: { selectedOptions : [ {index: 3} ]}});
+    selectWrapper.simulate('change', { target: { selectedOptions : [ {index: 2} ]}});
     /*the timeout is needed because of the animation (2 secs) 
       the map view center won't be set immediately*/
     setTimeout(() => {
-      expect(mapComponent.instance().props.currentLocation).to.deep.equal([1391493.6349159197, 5146011.679282788]);
+      expect(mapComponent.instance().olMap.getView().getCenter()).to.deep.equal([3225415.454040626, 5014229.844289909]);
     }, 3000);
   });
 
