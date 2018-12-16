@@ -3,6 +3,9 @@ import { configure, shallow, mount, render} from 'enzyme';
 import chai, { expect } from 'chai';
 import App from '../App';
 import chaiEnzyme from 'chai-enzyme';
+import { GeoJSON } from 'ol/format.js';
+
+import testFeature from './testFeature';
 
 import Adapter from 'enzyme-adapter-react-16';
 
@@ -38,6 +41,13 @@ describe('App Component testing', function() {
       expect(mapComponent.instance().olMap.getView().getCenter()).to.deep.equal([3225415.454040626, 5014229.844289909]);
     }, 3000);
   });
+
+  it('Test the drop file behaviour', () => {
+    const mockFeature = new GeoJSON().readFeatures(testFeature)
+    expect(mapComponent).to.have.length(1);
+    mapComponent.simulate('drop', {features: [mockFeature]});
+    expect(appWrapper).to.have.length(1)
+  })
 
 chai.use(chaiEnzyme())
 

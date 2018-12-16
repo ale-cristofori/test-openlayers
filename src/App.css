@@ -34,3 +34,8 @@
     transform: rotate(360deg);
   }
 }
+
+.interactions {
+  display: flex;
+  flex-direction: column
+}
