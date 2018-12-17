@@ -1,6 +1,4 @@
-const testFeature = {
-  "type": "FeatureCollection",
-  "features": [
+const testFeature = 
     {
       "type": "Feature",
       "properties": {
@@ -19,7 +17,5 @@ const testFeature = {
         ]
       }
     }
-  ]
-}
 
 export default testFeature
