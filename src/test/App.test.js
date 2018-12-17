@@ -43,11 +43,21 @@ describe('App Component testing', function() {
   });
 
   it('Test the drop file behaviour', () => {
+    expect(mapComponent.instance().olMap.getLayers().getArray()[1].getSource().getFeatures()).to.have.lengthOf(0);
     const mockFeature = new GeoJSON().readFeatures(testFeature)
     expect(mapComponent).to.have.length(1);
-    mapComponent.simulate('drop', {features: [mockFeature]});
-    expect(appWrapper).to.have.length(1)
+    mapComponent.instance().dragAndDropInteraction.dispatchEvent({
+      type: 'addfeatures',
+      features: mockFeature
+    });
+    expect(mapComponent.instance().olMap.getLayers().getArray()[1].getSource().getFeatures()).to.have.lengthOf(1);
+    setTimeout(() => {
+      expect(mapComponent.instance().olMap.getLayers()).to.deep.equal([-11750511.484223576, 4725642.836702737]);
+    }, 3000);
   })
+
+
+
 
 chai.use(chaiEnzyme())
 
