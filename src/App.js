@@ -61,11 +61,13 @@ class App extends Component {
   }
 
 
-  uploadFeature(features) {
-    const featCentre = JSON.parse(features[features.length -1]).properties.centre;
+  uploadFeature(feature) {
+    const featCentre = JSON.parse(feature).properties.centre;
+    const Newfeatures = this.state.uploadedFeatures.slice();
+    Newfeatures.push(feature);
     this.setState(() => {
       return {
-        uploadedFeatures : features,
+        uploadedFeatures : Newfeatures,
         currentLocation : featCentre
       }
     })

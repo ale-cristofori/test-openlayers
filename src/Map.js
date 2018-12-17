@@ -96,15 +96,11 @@ class MapComponent extends Component {
         });
 
         this.dragAndDropInteraction.on('addfeatures', (event) => {
-            const eventFeatures = event.features;
-            const GeoJSONFeats = [];
-            eventFeatures.forEach(element => {
-              const featureCentre = this.calculateCentre(element.getGeometry().getExtent())
-              element.setProperties({"centre": featureCentre})
-              GeoJSONFeats.push(new GeoJSON().writeFeature(element))
-            });
-            const newStateFeatures = this.props.features.concat(GeoJSONFeats)
-            this.props.onUploadFeature(newStateFeatures);
+            const eventFeature = event.features[0];
+            const featureCentre = this.calculateCentre(eventFeature.getGeometry().getExtent())
+            eventFeature.setProperties({"centre": featureCentre})
+            const GeoJSONFeature = new GeoJSON().writeFeature(eventFeature);
+            this.props.onUploadFeature(GeoJSONFeature);
         });
     }
 
