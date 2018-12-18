@@ -5,14 +5,15 @@ import App from '../App';
 import chaiEnzyme from 'chai-enzyme';
 import { GeoJSON } from 'ol/format.js';
 
-import testFeature from './testFeature';
+import { testFeature, testFeature2 } from './testFeature';
 
 import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
 
 let appWrapper; 
-let selectWrapper; 
+let selectWrapper;
+let buttonWrapper;
 let mapComponent;
 
 describe('App Component testing', function() {
@@ -21,8 +22,8 @@ describe('App Component testing', function() {
     /*create our enzyme wrappers for every test run
     for every component of our app*/
     appWrapper = mount(<App />);
-    mapComponent = appWrapper.find('MapComponent');
     selectWrapper = appWrapper.find('select');
+    mapComponent = appWrapper.find('MapComponent');
   })
 
 
@@ -32,7 +33,8 @@ describe('App Component testing', function() {
 });
 
 
-  it('Pan to selection behaviour', () => {
+  
+it('Pan to selection behaviour', () => {
     expect(mapComponent).to.have.length(1);
     selectWrapper.simulate('change', { target: { selectedOptions : [ {index: 2} ]}});
     /*the timeout is needed because of the animation (2 secs) 
@@ -51,13 +53,29 @@ describe('App Component testing', function() {
       features: mockFeature
     });
     expect(mapComponent.instance().olMap.getLayers().getArray()[1].getSource().getFeatures()).to.have.lengthOf(1);
+    const mapCentre = mockFeature[0].getProperties().centre
     setTimeout(() => {
-      expect(mapComponent.instance().olMap.getLayers()).to.deep.equal([-11750511.484223576, 4725642.836702737]);
+      expect(mapComponent.instance().olMap.getView().getCenter()).to.deep.equal(mapCentre);
     }, 3000);
-  })
+  });
 
-
-
+  it('Clear the uploadedFeatures layer', () => {
+    buttonWrapper = appWrapper.find('button');
+    expect(mapComponent).to.have.length(1);
+    expect(mapComponent.instance().olMap.getLayers().getArray()[1].getSource().getFeatures()).to.have.lengthOf(0);
+    const mockFeature1 = new GeoJSON().readFeatures(testFeature);
+    const mockFeature2 = new GeoJSON().readFeatures(testFeature2);
+    mapComponent.instance().dragAndDropInteraction.dispatchEvent({
+      type: 'addfeatures',
+      features: mockFeature1
+    });
+    mapComponent.instance().dragAndDropInteraction.dispatchEvent({
+      type: 'addfeatures',
+      features: mockFeature2
+    });
+    buttonWrapper.simulate('click');
+    expect(mapComponent.instance().olMap.getLayers().getArray()[1].getSource().getFeatures()).to.have.lengthOf(0);
+  });
 
 chai.use(chaiEnzyme())
 
